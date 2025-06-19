@@ -5,7 +5,6 @@ import typography from '../styles/typography';
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.greenPrimary,
-    width: '81%',
     borderRadius: 12,
     alignItems: 'center',
   },

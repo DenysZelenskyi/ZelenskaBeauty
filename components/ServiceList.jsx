@@ -12,12 +12,7 @@ const ServiceList = ({services}) => {
       contentContainerStyle={styles.listContainer}
       columnWrapperStyle={styles.columnWrapper}
       renderItem={({item}) => (
-        <ServiceCard
-          title={item.title}
-          price={item.price}
-          image={item.image}
-          onPress={() => console.log(`${item.title} pressed`)}
-        />
+        <ServiceCard title={item.title} price={item.price} image={item.image} />
       )}
     />
   );

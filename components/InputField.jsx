@@ -4,11 +4,11 @@ import styles from './inputFieldStyles';
 import typography from '../styles/typography';
 
 const InputField = ({
-  label,
   value,
   onChangeText,
   placeholder,
   secureTextEntry = false,
+  style,
 }) => {
   return (
     <TextInput
@@ -16,7 +16,8 @@ const InputField = ({
       onChangeText={onChangeText}
       placeholder={placeholder}
       secureTextEntry={secureTextEntry}
-      style={[styles.input, typography.bodyM]}
+      style={[styles.input, typography.bodyM, style]} // добавляем внешний стиль
+      placeholderTextColor="#999"
     />
   );
 };

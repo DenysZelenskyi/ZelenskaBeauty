@@ -4,7 +4,7 @@ import typography from '../styles/typography';
 
 const styles = StyleSheet.create({
   input: {
-    width: '81%',
+    // width: '81%',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 14,

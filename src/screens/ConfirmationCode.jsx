@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,9 +8,13 @@ import {
 } from 'react-native';
 import styles from './confirmationCodeStyles';
 import SCREENS from '../constants/SCREENS';
+import {ThemeContext} from '../context/ThemeContext';
+import {getThemedStyles} from '../appStyles';
 
 const ConfirmationCode = ({navigation}) => {
   const [code, setCode] = useState(['', '', '', '']);
+  const {theme} = useContext(ThemeContext);
+  const themedStyles = getThemedStyles(theme);
 
   const handleChange = (text, index) => {
     const newCode = [...code];
@@ -26,10 +30,10 @@ const ConfirmationCode = ({navigation}) => {
   const refs = {};
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={themedStyles.container}>
       <View style={styles.padding20}>
-        <Text style={styles.title}>Enter confirmation code</Text>
-        <Text style={styles.subtitle}>
+        <Text style={themedStyles.text}>Enter confirmation code</Text>
+        <Text style={themedStyles.text}>
           A 4-digit code was sent to {'\n'} 661 123 12 23
         </Text>
 
@@ -48,7 +52,7 @@ const ConfirmationCode = ({navigation}) => {
         </View>
 
         <TouchableOpacity>
-          <Text style={styles.resendText}>Resend code</Text>
+          <Text style={themedStyles.text}>Resend code</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

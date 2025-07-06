@@ -1,20 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View} from 'react-native';
-
+import React, {useContext, useEffect, useState} from 'react';
+import {SafeAreaView, View, ActivityIndicator, Text} from 'react-native';
+// import {useNavigation} from '@react-navigation/native';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
-
 import {fetchServices} from '../api/api';
-import {ActivityIndicator, Text} from 'react-native';
 import ServiceList from '../components/ServiceList';
-
-import styles from '../appStyles';
+import {ThemeContext} from '../context/ThemeContext';
+import {getThemedStyles} from '../appStyles';
+// import SCREENS from '../constants/SCREENS';
 
 const HomeScreen = () => {
+  // const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const {theme} = useContext(ThemeContext);
+  const themedStyles = getThemedStyles(theme);
 
   useEffect(() => {
     const loadData = async () => {
@@ -27,7 +29,6 @@ const HomeScreen = () => {
         setLoading(false);
       }
     };
-
     loadData();
   }, []);
 
@@ -36,21 +37,20 @@ const HomeScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={themedStyles.container}>
       <Header title={'Hey, beautiful!'} />
-      <View style={styles.centered}>
+      <View style={themedStyles.centered}>
         <SearchBar
           value={search}
           onChangeText={setSearch}
           placeholder="Search for a service"
         />
       </View>
-
-      <View style={styles.container}>
+      <View style={themedStyles.container}>
         {loading ? (
-          <ActivityIndicator size="large" color="#000" />
+          <ActivityIndicator size="large" color="#007002" />
         ) : error ? (
-          <Text>{error}</Text>
+          <Text style={themedStyles.text}>{error}</Text>
         ) : (
           <ServiceList services={filteredServices} />
         )}

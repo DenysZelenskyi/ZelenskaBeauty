@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {SafeAreaView, View, Text, ScrollView} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import InputField from '../components/InputField';
 import MainButton from '../components/MainButton';
 import styles from './signUpScreenStyles';
 import SCREENS from '../constants/SCREENS';
+import {ThemeContext} from '../context/ThemeContext';
+import {getThemedStyles} from '../appStyles';
 
 const SignUpScreen = ({navigation}) => {
   const [name, setName] = useState('');
@@ -12,6 +14,8 @@ const SignUpScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [agree, setAgree] = useState(false);
+  const {theme} = useContext(ThemeContext);
+  const themedStyles = getThemedStyles(theme);
 
   const handleContinue = () => {
     if (agree) {
@@ -20,11 +24,13 @@ const SignUpScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.inner}>
+    <SafeAreaView style={themedStyles.container}>
+      <ScrollView contentContainerStyle={themedStyles.container}>
         <View style={styles.padding40}>
-          <Text style={styles.title}>Sign up</Text>
-          <Text style={styles.subtitle}>Create an account to get started</Text>
+          <Text style={themedStyles.text}>Sign up</Text>
+          <Text style={themedStyles.text}>
+            Create an account to get started
+          </Text>
 
           <InputField
             placeholder="Name"
@@ -40,7 +46,7 @@ const SignUpScreen = ({navigation}) => {
             style={styles.input}
           />
 
-          <Text style={styles.passwordLabel}>Password</Text>
+          <Text style={themedStyles.text}>Password</Text>
 
           <InputField
             placeholder="Create a password"
@@ -60,8 +66,8 @@ const SignUpScreen = ({navigation}) => {
 
           <View style={styles.checkboxRow}>
             <CheckBox disabled={false} value={agree} onValueChange={setAgree} />
-            <Text style={styles.checkboxText}>
-              I’ve read and agree with the <Text>Terms and Conditions</Text> and
+            <Text style={themedStyles.text}>
+              I've read and agree with the <Text>Terms and Conditions</Text> and
               the <Text>Privacy Policy</Text>.
             </Text>
           </View>

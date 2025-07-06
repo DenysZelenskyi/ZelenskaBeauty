@@ -1,12 +1,16 @@
 import {StyleSheet} from 'react-native';
+import colors from './styles/colors';
 
-export default StyleSheet.create({
-  centered: {
-    // flex: 1,
-    alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  container: {
-    flex: 1,
-  },
-});
+export const getThemedStyles = theme =>
+  StyleSheet.create({
+    centered: {
+      alignItems: 'center',
+    },
+    container: {
+      flex: 1,
+      backgroundColor: theme === 'dark' ? colors.black : colors.white,
+    },
+    text: {
+      color: theme === 'dark' ? colors.white : colors.black,
+    },
+  });

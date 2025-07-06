@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import styles from './serviceCardStyles';
 import {useNavigation} from '@react-navigation/native';
 import SCREENS from '../constants/SCREENS';
+import {ThemeContext} from '../context/ThemeContext';
+import {getThemedServiceCardStyles} from './serviceCardStyles';
 
 const ServiceCard = ({title, price, image, onPress, style}) => {
   const navigation = useNavigation();
+  const {theme} = useContext(ThemeContext);
+  const themedStyles = getThemedServiceCardStyles(theme);
 
   const handlePress = () => {
     if (onPress) {
@@ -17,12 +20,21 @@ const ServiceCard = ({title, price, image, onPress, style}) => {
     }
   };
 
+  const imageSource =
+    typeof image === 'string' && image.startsWith('http')
+      ? {uri: image}
+      : image;
+
   return (
-    <TouchableOpacity onPress={handlePress} style={[styles.card, style]}>
-      <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
-      <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>{price}</Text>
+    <TouchableOpacity onPress={handlePress} style={[themedStyles.card, style]}>
+      <Image
+        source={{uri: image}}
+        style={themedStyles.image}
+        resizeMode="cover"
+      />
+      <View style={themedStyles.content}>
+        <Text style={themedStyles.title}>{title}</Text>
+        <Text style={themedStyles.price}>{price}</Text>
       </View>
     </TouchableOpacity>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -14,12 +14,16 @@ import ConfirmationScreen from '../screens/ConfirmationScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import ConfirmationCode from '../screens/ConfirmationCode.jsx';
+import {ThemeContext} from '../context/ThemeContext';
+import colors from '../styles/colors';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => (
-  <Drawer.Navigator initialRouteName={SCREENS.HOME}>
+  <Drawer.Navigator
+    initialRouteName={SCREENS.HOME}
+    screenOptions={{headerShown: false}}>
     <Drawer.Screen
       name={SCREENS.HOME}
       component={HomeScreen}
@@ -34,9 +38,26 @@ const DrawerNavigation = () => (
 );
 
 const Navigation = () => {
+  const {theme} = useContext(ThemeContext);
+  const isDark = theme === 'dark';
+  const headerStyle = {
+    backgroundColor: isDark ? colors.black : colors.white,
+  };
+  const headerTitleStyle = {
+    color: isDark ? colors.white : colors.black,
+    fontWeight: '700',
+    fontSize: 20,
+  };
+  const headerTintColor = isDark ? colors.greenPrimary : colors.black;
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle,
+          headerTitleStyle,
+          headerTintColor,
+        }}>
         <Stack.Screen
           name={SCREENS.LOGIN}
           component={LoginScreen}

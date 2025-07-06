@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
-import styles from './step2ScreenStyles';
 import {useNavigation} from '@react-navigation/native';
 import SCREENS from '../constants/SCREENS';
+import {ThemeContext} from '../context/ThemeContext';
+import {getThemedStyles} from '../appStyles';
+import {getThemedStep2Styles} from './step2ScreenStyles';
 
 const Step2Screen = ({route}) => {
   const {service, selectedDate, selectedTime} = route.params;
   const navigation = useNavigation();
+  const {theme} = useContext(ThemeContext);
+  const themedStyles = getThemedStyles(theme);
+  const themedStep2 = getThemedStep2Styles(theme);
 
   const timeSlots = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM'];
   const currentIndex = timeSlots.indexOf(selectedTime);
@@ -22,23 +27,25 @@ const Step2Screen = ({route}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.stepper}>
+    <SafeAreaView style={themedStep2.container}>
+      <View style={themedStep2.stepper}>
         {[1, 2, 3].map(step => (
-          <View key={step} style={styles.stepItem}>
+          <View key={step} style={themedStep2.stepItem}>
             <View
               style={[
-                styles.stepCircle,
-                step === 1 && styles.stepCircleDone,
-                step === 2 && styles.stepCircleActive,
+                themedStep2.stepCircle,
+                step === 1 && themedStep2.stepCircleDone,
+                step === 2 && themedStep2.stepCircleActive,
               ]}>
-              <Text style={styles.stepNumber}>{step === 1 ? '✓' : step}</Text>
+              <Text style={themedStep2.stepNumber}>
+                {step === 1 ? '✓' : step}
+              </Text>
             </View>
             <Text
               style={[
-                styles.stepLabel,
-                step === 1 && styles.stepLabelDone,
-                step === 2 && styles.stepLabelActive,
+                themedStep2.stepLabel,
+                step === 1 && themedStep2.stepLabelDone,
+                step === 2 && themedStep2.stepLabelActive,
               ]}>
               Step
             </Text>
@@ -46,22 +53,25 @@ const Step2Screen = ({route}) => {
         ))}
       </View>
 
-      <View style={styles.card}>
-        <Image source={{uri: service.image}} style={styles.image} />
-        <Text style={styles.title}>{service.title}</Text>
-        <Text style={styles.price}>{service.price}</Text>
+      <View style={themedStep2.card}>
+        <Image source={{uri: service.image}} style={themedStep2.image} />
+        <Text style={themedStep2.title}>{service.title}</Text>
+        <Text style={themedStep2.price}>{service.price}</Text>
       </View>
 
-      <View style={styles.timePicker}>
+      <View style={themedStep2.timePicker}>
         <TouchableOpacity
           onPress={() => console.log(getPrevTime())}
           disabled={currentIndex === 0}
-          style={[styles.sideTime, currentIndex === 0 && styles.disabled]}>
-          <Text style={styles.timeText}>{getPrevTime()}</Text>
+          style={[
+            themedStep2.sideTime,
+            currentIndex === 0 && themedStep2.disabled,
+          ]}>
+          <Text style={themedStep2.timeText}>{getPrevTime()}</Text>
         </TouchableOpacity>
 
-        <View style={styles.mainTime}>
-          <Text style={styles.timeText}>
+        <View style={themedStep2.mainTime}>
+          <Text style={themedStep2.timeText}>
             {selectedDate} {selectedTime}
           </Text>
         </View>
@@ -70,15 +80,15 @@ const Step2Screen = ({route}) => {
           onPress={() => console.log(getNextTime())}
           disabled={currentIndex === timeSlots.length - 1}
           style={[
-            styles.sideTime,
-            currentIndex === timeSlots.length - 1 && styles.disabled,
+            themedStep2.sideTime,
+            currentIndex === timeSlots.length - 1 && themedStep2.disabled,
           ]}>
-          <Text style={styles.timeText}>{getNextTime()}</Text>
+          <Text style={themedStep2.timeText}>{getNextTime()}</Text>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity
-        style={styles.confirmButton}
+        style={themedStep2.confirmButton}
         onPress={() =>
           navigation.navigate(SCREENS.STEP3, {
             service,
@@ -86,7 +96,7 @@ const Step2Screen = ({route}) => {
             selectedTime,
           })
         }>
-        <Text style={styles.confirmText}>Confirm</Text>
+        <Text style={themedStep2.confirmText}>Confirm</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

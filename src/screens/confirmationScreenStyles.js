@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
     marginTop: '30%',
   },
   title: {
-    fontSize: 24,
+    fontSize: 36,
     fontWeight: '700',
     textAlign: 'center',
-    color: colors.black,
+    color: colors.white,
   },
   messageBox: {
     backgroundColor: '#A4E6A4',
@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 16,
     fontWeight: '600',
+  },
+  centerContent: {
+    flex: 1,
+    alignItems: 'center',
+    width: '100%',
   },
 });
 

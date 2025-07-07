@@ -37,14 +37,7 @@ const Header = ({
       <View style={themedHeaderStyles.side}>
         {leftLabel && onLeftPress ? (
           <TouchableOpacity onPress={onLeftPress}>
-            <Text
-              style={{
-                color: colors.greenPrimary,
-                fontWeight: 'bold',
-                fontSize: 16,
-              }}>
-              {leftLabel}
-            </Text>
+            <Text style={themedHeaderStyles.leftLabel}>{leftLabel}</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={handleLogout}>
@@ -69,27 +62,15 @@ const Header = ({
         {showCart && (
           <TouchableOpacity
             onPress={() => navigation.navigate('Cart')}
-            style={{marginLeft: 16}}>
+            style={themedHeaderStyles.cartButton}>
             <Icon
               name="shopping-cart"
               size={24}
               color={theme === 'dark' ? colors.greenPrimary : colors.black}
             />
             {cartCount > 0 && (
-              <View
-                style={{
-                  position: 'absolute',
-                  top: -6,
-                  right: -10,
-                  backgroundColor: colors.greenPrimary,
-                  borderRadius: 8,
-                  minWidth: 16,
-                  height: 16,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingHorizontal: 3,
-                }}>
-                <Text style={{color: '#fff', fontSize: 10, fontWeight: 'bold'}}>
+              <View style={themedHeaderStyles.cartBadge}>
+                <Text style={themedHeaderStyles.cartBadgeText}>
                   {cartCount}
                 </Text>
               </View>

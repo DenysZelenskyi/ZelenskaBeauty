@@ -29,4 +29,29 @@ export const getThemedHeaderStyles = theme =>
       ...typography.h3,
       color: theme === 'dark' ? colors.greenLighter : colors.black,
     },
+    leftLabel: {
+      color: colors.greenPrimary,
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+    cartButton: {
+      marginLeft: 16,
+    },
+    cartBadge: {
+      position: 'absolute',
+      top: -6,
+      right: -10,
+      backgroundColor: colors.greenPrimary,
+      borderRadius: 8,
+      minWidth: 16,
+      height: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 3,
+    },
+    cartBadgeText: {
+      color: '#fff',
+      fontSize: 10,
+      fontWeight: 'bold',
+    },
   });

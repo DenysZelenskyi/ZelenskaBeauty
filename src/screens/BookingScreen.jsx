@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {Calendar} from 'react-native-calendars';
+import CustomCalendar from '../components/CustomCalendar';
 import {useNavigation} from '@react-navigation/native';
 import SCREENS from '../constants/SCREENS';
 import {ThemeContext} from '../context/ThemeContext';
@@ -22,29 +22,6 @@ const BookingScreen = ({route}) => {
   const themedStyles = getThemedStyles(theme);
   const themedBooking = getThemedBookingStyles(theme);
   const timeSlots = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM'];
-
-  // Настройки календаря для темной темы
-  const calendarTheme = {
-    backgroundColor: theme === 'dark' ? colors.black : colors.white,
-    calendarBackground: theme === 'dark' ? colors.black : colors.white,
-    textSectionTitleColor: theme === 'dark' ? colors.white : colors.black,
-    selectedDayBackgroundColor: colors.greenPrimary,
-    selectedDayTextColor: colors.white,
-    todayTextColor: colors.greenPrimary,
-    dayTextColor: theme === 'dark' ? colors.white : colors.black,
-    textDisabledColor: theme === 'dark' ? colors.grayMedium : colors.grayLight,
-    dotColor: colors.greenPrimary,
-    selectedDotColor: colors.white,
-    arrowColor: theme === 'dark' ? colors.white : colors.black,
-    monthTextColor: theme === 'dark' ? colors.white : colors.black,
-    indicatorColor: theme === 'dark' ? colors.white : colors.black,
-    textDayFontWeight: '300',
-    textMonthFontWeight: 'bold',
-    textDayHeaderFontWeight: '300',
-    textDayFontSize: 16,
-    textMonthFontSize: 16,
-    textDayHeaderFontSize: 13,
-  };
 
   return (
     <SafeAreaView style={themedBooking.container}>
@@ -70,15 +47,10 @@ const BookingScreen = ({route}) => {
       </View>
 
       <View style={themedBooking.calendarContainer}>
-        <Calendar
+        <CustomCalendar
           onDayPress={day => setSelectedDate(day.dateString)}
-          markedDates={{
-            [selectedDate]: {
-              selected: true,
-              selectedColor: colors.greenPrimary,
-            },
-          }}
-          theme={calendarTheme}
+          selectedDate={selectedDate}
+          theme={theme}
         />
       </View>
 

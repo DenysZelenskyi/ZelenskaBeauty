@@ -1,4 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import {SafeAreaView, View, ActivityIndicator, Text} from 'react-native';
 // import {useNavigation} from '@react-navigation/native';
 import Header from '../components/Header';
@@ -32,9 +38,17 @@ const HomeScreen = () => {
     loadData();
   }, []);
 
-  const filteredServices = services.filter(service =>
-    service.title.toLowerCase().includes(search.toLowerCase()),
-  );
+  // Оптимизация фильтрации с useMemo
+  const filteredServices = useMemo(() => {
+    return services.filter(service =>
+      service.title.toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [services, search]);
+
+  // Стабилизация функции изменения поиска
+  const handleSearchChange = useCallback(text => {
+    setSearch(text);
+  }, []);
 
   return (
     <SafeAreaView style={themedStyles.container}>
@@ -42,7 +56,7 @@ const HomeScreen = () => {
       <View style={themedStyles.centered}>
         <SearchBar
           value={search}
-          onChangeText={setSearch}
+          onChangeText={handleSearchChange}
           placeholder="Search for a service"
         />
       </View>

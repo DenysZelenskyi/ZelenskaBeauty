@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useCallback} from 'react';
 import {SafeAreaView, View, ActivityIndicator, Text, Alert} from 'react-native';
 import {fetchProducts} from '../api/api';
 import ServiceList from '../components/ServiceList';
@@ -32,10 +32,13 @@ const ShopScreen = () => {
     loadProducts();
   }, []);
 
-  const handleAddToCart = product => {
-    dispatch(addItem(product));
-    Alert.alert('Added to cart', `${product.title} by ${product.brand}`);
-  };
+  const handleAddToCart = useCallback(
+    product => {
+      dispatch(addItem(product));
+      Alert.alert('Added to cart', `${product.title} by ${product.brand}`);
+    },
+    [dispatch],
+  );
 
   return (
     <SafeAreaView style={themedStyles.container}>

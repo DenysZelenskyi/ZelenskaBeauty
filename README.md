@@ -6,7 +6,7 @@
   - Розмір: **2.5 MB**
 
 - **Після оптимізації (з CustomCalendar):**
-  ![Бандл після оптимізації](./screenshots/bundle-after.png)
+  ![Бандл після оптимізації](./screenshots/bundle-after1.png)
   - Розмір: **2.1 MB**
 
 Висновок

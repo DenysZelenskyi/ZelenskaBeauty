@@ -3,7 +3,7 @@ import ServiceCard from './ServiceCard';
 import {FlatList} from 'react-native';
 import styles from './serviceListStyle';
 
-const ServiceList = ({services}) => {
+const ServiceList = ({services, onPress}) => {
   return (
     <FlatList
       data={services}
@@ -16,7 +16,8 @@ const ServiceList = ({services}) => {
           title={item.title}
           price={item.price}
           image={item.image}
-          onPress={undefined}
+          brand={item.brand}
+          onPress={onPress ? () => onPress(item) : undefined}
         />
       )}
     />

@@ -16,6 +16,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import ConfirmationCode from '../screens/ConfirmationCode.jsx';
 import {ThemeContext} from '../context/ThemeContext';
 import colors from '../styles/colors';
+import ShopScreen from '../screens/ShopScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -30,9 +31,9 @@ const DrawerNavigation = () => (
       options={{title: 'Home'}}
     />
     <Drawer.Screen
-      name={SCREENS.BOOKING}
-      component={BookingScreen}
-      options={{title: 'Booking'}}
+      name="Shop"
+      component={ShopScreen}
+      options={{title: 'Shop'}}
     />
   </Drawer.Navigator>
 );
@@ -79,6 +80,11 @@ const Navigation = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name={SCREENS.BOOKING}
+          component={BookingScreen}
+          options={{title: 'Booking'}}
+        />
+        <Stack.Screen
           name={SCREENS.SERVICE_DETAILS}
           component={ServiceDetailsScreen}
           options={{title: 'Service Details'}}
@@ -97,6 +103,11 @@ const Navigation = () => {
           name={SCREENS.CONFIRMATION}
           component={ConfirmationScreen}
           options={{title: 'Appointment Confirmed'}}
+        />
+        <Stack.Screen
+          name={'Cart'}
+          component={require('../screens/CartScreen.jsx').default}
+          options={{title: 'Cart'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

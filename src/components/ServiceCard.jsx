@@ -5,7 +5,6 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
-  withTiming,
 } from 'react-native-reanimated';
 import SCREENS from '../constants/SCREENS';
 import {ThemeContext} from '../context/ThemeContext';
@@ -16,7 +15,6 @@ const ServiceCard = React.memo(({title, price, image, onPress, style}) => {
   const {theme} = useContext(ThemeContext);
   const themedStyles = getThemedServiceCardStyles(theme);
 
-  // Анимация масштабирования
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => {

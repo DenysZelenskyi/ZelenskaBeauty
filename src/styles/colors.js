@@ -16,6 +16,7 @@ const colors = {
   midGray: '#494A50',
   lightGray: '#71727A',
   lightestGray: '#8F9098',
+  errorRed: '#FF3B30',
 };
 
 export default colors;

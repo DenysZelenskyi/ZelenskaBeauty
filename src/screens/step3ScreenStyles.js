@@ -60,7 +60,6 @@ export const getThemedStep3Styles = theme =>
       flex: 1,
       borderRadius: 12,
       resizeMode: 'cover',
-      // height: 160, // можно раскомментировать при необходимости
     },
     title: {
       fontSize: 18,

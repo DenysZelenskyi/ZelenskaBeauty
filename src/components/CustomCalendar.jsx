@@ -19,11 +19,9 @@ const CustomCalendar = ({onDayPress, selectedDate, theme = 'light'}) => {
     const firstDayOfWeek = firstDay.getDay();
 
     const days = [];
-    // Добавляем пустые дни в начале месяца
     for (let i = 0; i < firstDayOfWeek; i++) {
       days.push(null);
     }
-    // Добавляем дни месяца
     for (let i = 1; i <= daysInMonth; i++) {
       days.push(i);
     }

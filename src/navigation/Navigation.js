@@ -17,6 +17,7 @@ import ConfirmationCode from '../screens/ConfirmationCode.jsx';
 import {ThemeContext} from '../context/ThemeContext';
 import colors from '../styles/colors';
 import ShopScreen from '../screens/ShopScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,6 +35,11 @@ const DrawerNavigation = () => (
       name="Shop"
       component={ShopScreen}
       options={{title: 'Shop'}}
+    />
+    <Drawer.Screen
+      name="Account"
+      component={ProfileScreen}
+      options={{title: 'Account'}}
     />
   </Drawer.Navigator>
 );
@@ -58,6 +64,7 @@ const Navigation = () => {
           headerStyle,
           headerTitleStyle,
           headerTintColor,
+          animation: 'slide_from_right',
         }}>
         <Stack.Screen
           name={SCREENS.LOGIN}
@@ -102,7 +109,10 @@ const Navigation = () => {
         <Stack.Screen
           name={SCREENS.CONFIRMATION}
           component={ConfirmationScreen}
-          options={{title: 'Appointment Confirmed'}}
+          options={{
+            title: 'Appointment Confirmed',
+            animation: 'fade',
+          }}
         />
         <Stack.Screen
           name={'Cart'}

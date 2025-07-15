@@ -5,24 +5,32 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import {SafeAreaView, View, ActivityIndicator, Text} from 'react-native';
-// import {useNavigation} from '@react-navigation/native';
+import {
+  SafeAreaView,
+  View,
+  ActivityIndicator,
+  Text,
+  Animated,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import {fetchServices} from '../api/api';
 import ServiceList from '../components/ServiceList';
 import {ThemeContext} from '../context/ThemeContext';
 import {getThemedStyles} from '../appStyles';
-// import SCREENS from '../constants/SCREENS';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import homeScreenStyles from './homeScreenStyles';
 
 const HomeScreen = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {theme} = useContext(ThemeContext);
   const themedStyles = getThemedStyles(theme);
+  const [tipAnim] = useState(new Animated.Value(-30));
 
   useEffect(() => {
     const loadData = async () => {
@@ -38,20 +46,47 @@ const HomeScreen = () => {
     loadData();
   }, []);
 
-  // Оптимизация фильтрации с useMemo
+  useEffect(() => {
+    Animated.sequence([
+      Animated.timing(tipAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }),
+      Animated.timing(tipAnim, {
+        toValue: -30,
+        duration: 400,
+        useNativeDriver: false,
+      }),
+      Animated.delay(300),
+      Animated.timing(tipAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }),
+      Animated.timing(tipAnim, {
+        toValue: -30,
+        duration: 400,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  }, [tipAnim]);
+
   const filteredServices = useMemo(() => {
     return services.filter(service =>
       service.title.toLowerCase().includes(search.toLowerCase()),
     );
   }, [services, search]);
 
-  // Стабилизация функции изменения поиска
   const handleSearchChange = useCallback(text => {
     setSearch(text);
   }, []);
 
   return (
     <SafeAreaView style={themedStyles.container}>
+      <Animated.View style={[homeScreenStyles.menuTip, {left: tipAnim}]}>
+        <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
+      </Animated.View>
       <Header title={'Hey, beautiful!'} />
       <View style={themedStyles.centered}>
         <SearchBar

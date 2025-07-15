@@ -56,7 +56,7 @@
 
 | Реєстрація                  | Drawer-меню                 | Анімація хвостика |
 | --------------------------- | --------------------------- | ----------------- |
-| ![](screenshots/signup.png) | ![](screenshots/drawer.png) |
+| ![](screenshots/SignUp.png) | ![](screenshots/Drawer.png) |
 
 ---
 
